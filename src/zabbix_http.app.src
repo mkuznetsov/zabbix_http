@@ -1,0 +1,12 @@
+{application, zabbix_http,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, [zabbix_http]},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { zabbix_http_app, []}},
+  {env, []}
+ ]}.
