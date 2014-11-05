@@ -12,7 +12,7 @@
 -behaviour(gen_fsm).
 -include("zabbix_http.hrl").
 %% API
--export([start_link/0, start_link/2, log/2,log/4, log/1, set_host_port/2, ts/0]).
+-export([start_link/0, start_link/2, log/2,log/4, log/1, set_host_port/2, ts/0, hostname/0, flush/0]).
 
 %% gen_fsm callbacks
 -export([init/1,
@@ -313,11 +313,9 @@ workflow_test_() ->
      {<<"Typical flow">>,
       fun try_fsm_workflow/0
      }
-%%      ,{<<"Inner flow">>,
-%%       fun try_inner_workflow/0
-%%      }
-
-
+     ,{<<"Inner flow">>,
+      fun try_inner_workflow/0
+     }
    ]}.
 
 try_inner_workflow()->
