@@ -326,7 +326,6 @@ code_change(_OldVsn, StateName, State, _Extra) ->
 to_json(#event{metric = M,value = V, host = H, timestamp = T}) when is_binary(M), is_number(V), is_binary(H)->
   TsBin=integer_to_binary(T),
   VBin=integer_to_binary(V),
-%%   <<"{\"host\":\"",H/binary,"\",\"key\":\"",M/binary,"\",\"value\":\"",VBin/binary,"\"}">>;
   <<"{\"host\":\"",H/binary,"\",\"key\":\"",M/binary,"\",\"value\":\"",VBin/binary,"\",\"clock\":",TsBin/binary,"}">>;
 
 
@@ -334,7 +333,6 @@ to_json([#event{}=Head|Rest])->
   JsonRest=[[<<",">>,to_json(Event)]||Event<-Rest],
   JsonEventList=list_to_binary([to_json(Head)|JsonRest]),
   Ts=integer_to_binary(ts()),
-%%   <<"{\"request\":\"sender data\",\"data\":\[",JsonEventList/binary,"\]}">>.
   <<"{\"request\":\"sender data\",\"data\":\[",JsonEventList/binary,"\],\"clock\":",Ts/binary,"}">>.
 
 ts()->
@@ -342,7 +340,7 @@ ts()->
   A*1000000000 + B*1000 + (C div 1000).
 hostname()->
   {ok, Hostname} = inet:gethostname(),
-  {ok,{hostent,FullHostname,[],inet,_,[_]}} = inet:gethostbyname(Hostname),
+  {ok,{hostent,FullHostname,_,inet,_,_}} = inet:gethostbyname(Hostname),
   list_to_binary(FullHostname).
 
 send(undefined,undefined,_)->
