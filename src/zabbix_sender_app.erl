@@ -1,4 +1,4 @@
--module(zabbix_http_app).
+-module(zabbix_sender_app).
 
 -behaviour(application).
 
@@ -10,7 +10,7 @@
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
-    zabbix_http_sup:start_link().
+    zabbix_sender_sup:start_link().
 
 stop(_State) ->
     ok.

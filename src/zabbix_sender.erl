@@ -6,13 +6,13 @@
 %%% @end
 %%% Created : 30. Oct 2014 17:04
 %%%-------------------------------------------------------------------
--module(zabbix_http).
+-module(zabbix_sender).
 -author("mike").
 
 -behaviour(gen_fsm).
 -include("zabbix_http.hrl").
 %% API
--export([start_link/0, start_link/2,
+-export([start_link/0, start_link/2,stop/0,
          log/2,log/4, log/1, flush/0,
          set_host_port/2, set_interval/1, agregate/1, ts/0, hostname/0 ]).
 

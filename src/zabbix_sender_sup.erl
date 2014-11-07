@@ -1,4 +1,4 @@
--module(zabbix_http_sup).
+-module(zabbix_sender_sup).
 
 -behaviour(supervisor).
 
@@ -23,5 +23,5 @@ start_link() ->
 %% ===================================================================
 
 init([]) ->
-    {ok, { {one_for_one, 5, 10}, [?CHILD(zabbix_http, worker)]} }.
+    {ok, { {one_for_one, 5, 10}, [?CHILD(zabbix_sender, worker)]} }.
 
